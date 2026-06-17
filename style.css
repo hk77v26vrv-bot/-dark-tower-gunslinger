@@ -1,0 +1,52 @@
+
+<style>
+
+body{
+    margin:0;
+    background:#1b140d;
+    color:#e6d5a8;
+    font-family:Georgia,serif;
+}
+
+#game{
+    max-width:700px;
+    margin:auto;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+}
+
+#stats{
+    background:#2d2218;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:15px;
+}
+
+#story{
+    background:#111;
+    min-height:220px;
+    padding:15px;
+    border-radius:8px;
+    overflow-y:auto;
+    margin-bottom:15px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    margin:8px 0;
+    font-size:18px;
+    background:#6a4d2f;
+    color:white;
+    border:none;
+    border-radius:8px;
+}
+
+button:active{
+    background:#8a6840;
+}
+
+</style>
