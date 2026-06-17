@@ -1,6 +1,3 @@
-
-<script>
-
 const player={
 health:10,
 ammo:6,
@@ -117,5 +114,3 @@ write("Game loaded.");
 }
 
 update();
-
-</script>
