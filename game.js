@@ -1,4 +1,9 @@
-alert("game.js loaded");
+const health = document.getElementById("health");
+const ammo = document.getElementById("ammo");
+const food = document.getElementById("food");
+const water = document.getElementById("water");
+const distance = document.getElementById("distance");
+const story = document.getElementById("story");
 const player={
 health:10,
 ammo:6,
