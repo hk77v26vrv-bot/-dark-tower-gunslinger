@@ -1,3 +1,4 @@
+alert("game.js loaded");
 const player={
 health:10,
 ammo:6,
