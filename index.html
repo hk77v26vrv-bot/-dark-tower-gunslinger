@@ -1,70 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>The Gunslinger</title>
 
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <div id="game">
 
-<h1>The Gunslinger</h1>
+<h1>THE GUNSLINGER</h1>
 
 <div id="stats">
 
-<div><strong>Day:</strong> <span id="day">1</span></div>
-<div><strong>Location:</strong> <span id="location">Mohaine Desert</span></div>
-
-<br>
-
-<div>
-Health
-<div style="background:#444;border-radius:5px;height:20px;">
-<div id="healthBar"
-style="background:#b22222;height:20px;width:100%;border-radius:5px;">
-</div>
-</div>
+<div class="stat">
+Day
+<span id="day">1</span>
 </div>
 
-<p>
-🔫 Ammo:
+<div class="stat">
+Location
+<span id="location">Mohaine Desert</span>
+</div>
+
+<div class="stat">
+Distance
+<span id="distance">0 miles</span>
+</div>
+
+<div class="stat">
+Ammo
 <span id="ammo">6</span>
-</p>
+</div>
 
-<p>
-🥩 Food:
+<div class="stat">
+Food
 <span id="food">3</span>
-</p>
+</div>
 
-<p>
-💧 Water:
+<div class="stat">
+Water
 <span id="water">3</span>
-</p>
+</div>
 
-<p>
-🌵 Distance:
-<span id="distance">0</span> miles
-</p>
+</div>
+
+<div id="healthContainer">
+
+<div id="healthLabel">
+Health
+</div>
+
+<div id="healthOuter">
+
+<div id="healthBar"></div>
+
+</div>
 
 </div>
 
 <div id="story">
-<p><b>The man in black fled across the desert...</b></p>
+
+<p><strong>The man in black fled across the desert...</strong></p>
+
 <p>...and the gunslinger followed.</p>
+
 </div>
 
-<button onclick="travel()">Travel</button>
-<button onclick="rest()">Rest</button>
-<button onclick="hunt()">Hunt</button>
-<button onclick="inventory()">Inventory</button>
-  
+<div id="buttons">
+
+<button id="travelBtn">Travel</button>
+
+<button id="restBtn">Rest</button>
+
+<button id="huntBtn">Hunt</button>
+
+<button id="inventoryBtn">Inventory</button>
+
+</div>
+
+</div>
+
 <script src="game.js"></script>
-
-</div>
 
 </body>
 </html>
