@@ -1,3 +1,6 @@
+const day = document.getElementById("day");
+const location = document.getElementById("location");
+const healthBar = document.getElementById("healthBar");
 const health = document.getElementById("health");
 const ammo = document.getElementById("ammo");
 const food = document.getElementById("food");
@@ -10,10 +13,14 @@ ammo:6,
 food:3,
 water:3,
 distance:0
+day:1,
+location:"Mohaine Desert"
 };
 
 function update(){
-
+day.textContent = player.day;
+location.textContent = player.location;
+healthBar.style.width = (player.health * 10) + "%";
 health.textContent=player.health;
 ammo.textContent=player.ammo;
 food.textContent=player.food;
@@ -32,6 +39,7 @@ story.scrollTop=story.scrollHeight;
 function travel(){
 
 player.distance+=5;
+player.day++;
 player.food--;
 player.water--;
 
@@ -120,3 +128,18 @@ write("Game loaded.");
 }
 
 update();
+function inventory(){
+
+alert(
+`Inventory
+
+🔫 Revolver
+
+Ammo: ${player.ammo}
+
+🥩 Food: ${player.food}
+
+💧 Water: ${player.water}`
+);
+
+}
