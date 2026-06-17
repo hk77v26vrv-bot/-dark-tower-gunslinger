@@ -1,111 +1,106 @@
-const health = document.getElementById("health");
-const ammo = document.getElementById("ammo");
-const food = document.getElementById("food");
-const water = document.getElementById("water");
-const distance = document.getElementById("distance");
-const story = document.getElementById("story");
-
-const day = document.getElementById("day");
-const location = document.getElementById("location");
-const healthBar = document.getElementById("healthBar");
-
 const player = {
+    day: 1,
+    location: "Mohaine Desert",
+    distance: 0,
     health: 10,
     ammo: 6,
     food: 3,
-    water: 3,
-    distance: 0,
-    day: 1,
-    location: "Mohaine Desert"
+    water: 3
 };
 
-function update() {
+// Grab HTML elements
+const day = document.getElementById("day");
+const location = document.getElementById("location");
+const distance = document.getElementById("distance");
+const ammo = document.getElementById("ammo");
+const food = document.getElementById("food");
+const water = document.getElementById("water");
+const healthBar = document.getElementById("healthBar");
+const story = document.getElementById("story");
 
-    if (health) health.textContent = player.health;
-    if (ammo) ammo.textContent = player.ammo;
-    if (food) food.textContent = player.food;
-    if (water) water.textContent = player.water;
-    if (distance) distance.textContent = player.distance;
+// Grab buttons
+const travelBtn = document.getElementById("travelBtn");
+const restBtn = document.getElementById("restBtn");
+const huntBtn = document.getElementById("huntBtn");
+const inventoryBtn = document.getElementById("inventoryBtn");
 
-    if (day) day.textContent = player.day;
-    if (location) location.textContent = player.location;
+// Update screen
+function updateScreen() {
 
-    if (healthBar) {
-        healthBar.style.width = (player.health * 10) + "%";
-    }
+    day.textContent = player.day;
+    location.textContent = player.location;
+    distance.textContent = player.distance + " miles";
+    ammo.textContent = player.ammo;
+    food.textContent = player.food;
+    water.textContent = player.water;
+
+    healthBar.style.width = (player.health * 10) + "%";
 
     localStorage.setItem("gunslingerSave", JSON.stringify(player));
 }
 
+// Add text to story
 function write(text) {
-    if (story) {
-        story.innerHTML += "<p>" + text + "</p>";
-        story.scrollTop = story.scrollHeight;
-    }
+
+    story.innerHTML += `<p>${text}</p>`;
+    story.scrollTop = story.scrollHeight;
+
 }
 
+// Travel
 function travel() {
 
-    player.distance += 5;
     player.day++;
+    player.distance += 5;
     player.food--;
     player.water--;
 
     const roll = Math.random();
 
-    if (roll < 0.3) {
+    if (roll < 0.25) {
 
-        fight();
+        write("A mutant watches you from a distant dune.");
 
-    } else if (roll < 0.5) {
+    } else if (roll < 0.50) {
 
         player.water++;
-        write("You discover a small spring.");
+        write("You discover a tiny spring hidden among the rocks.");
 
-    } else {
+    } else if (roll < 0.75) {
 
         write("The desert stretches endlessly before you.");
 
+    } else {
+
+        player.food++;
+        write("You find an abandoned camp with edible supplies.");
+
     }
 
-    update();
+    if (player.food < 0) player.food = 0;
+    if (player.water < 0) player.water = 0;
+
+    updateScreen();
+
 }
 
+// Rest
 function rest() {
 
     player.health = Math.min(10, player.health + 2);
 
-    write("You rest beneath the stars.");
+    write("You sleep beneath the cold desert stars.");
 
-    update();
+    updateScreen();
+
 }
 
+// Hunt
 function hunt() {
 
     if (player.ammo <= 0) {
 
         write("You have no ammunition.");
-        return;
-
-    }
-
-    player.ammo--;
-    player.food += 2;
-
-    write("You hunt successfully.");
-
-    update();
-}
-
-function fight() {
-
-    if (player.ammo <= 0) {
-
-        player.health -= 2;
-
-        write("A mutant attacks. You have no bullets!");
-
-        update();
 
         return;
 
@@ -115,19 +110,21 @@ function fight() {
 
     if (Math.random() < 0.7) {
 
-        write("You kill the mutant with a single shot.");
+        player.food += 2;
+
+        write("You bring down a desert hare.");
 
     } else {
 
-        player.health -= 2;
-
-        write("The mutant wounds you before escaping.");
+        write("Your shot echoes across the desert.");
 
     }
 
-    update();
+    updateScreen();
+
 }
 
+// Inventory
 function inventory() {
 
     alert(
@@ -141,19 +138,28 @@ Ammo: ${player.ammo}
 
 💧 Water: ${player.water}
 
-❤️ Health: ${player.health}/10`
+❤️ Health: ${player.health}/10
+
+📅 Day: ${player.day}`
     );
 
 }
 
+// Button events
+travelBtn.addEventListener("click", travel);
+restBtn.addEventListener("click", rest);
+huntBtn.addEventListener("click", hunt);
+inventoryBtn.addEventListener("click", inventory);
+
+// Load save
 const save = localStorage.getItem("gunslingerSave");
 
 if (save) {
 
     Object.assign(player, JSON.parse(save));
 
-    write("Game loaded.");
+    write("Previous journey loaded.");
 
 }
 
-update();
+updateScreen();
